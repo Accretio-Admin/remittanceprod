@@ -1,0 +1,10 @@
+module.exports.Token = require('./token.model');
+module.exports.User = require('./user.model');
+module.exports.UserLimitations = require('./userlimitations.model');
+module.exports.GreenRegions = require('./greenregions.model');
+module.exports.LandbankCredentials = require('./lb-credential.model');
+module.exports.CredentialsAssignment = require('./lb-credentials-assignment.model');
+module.exports.LandbankTrasaction = require('./lb-transactions.model');
+module.exports.AccessLevels = require('./access-level.model');
+module.exports.ApiGroups = require('./api-endpoint-group.model');
+module.exports.Config = require('./config.model');
