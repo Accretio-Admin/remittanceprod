@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'remittancebe'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_137157298D584ABE93283C8BCEE8DEE3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_580D8A23FAD7457F91F1213783F28D53 }}
           package: .
