@@ -9,7 +9,7 @@ const hardCodeConfig = {
         },
         "transactionAmount": {
           "transactionAmountLimit": {
-            "petTransactionAmount": 0,
+            "perTransactionAmount": 0,
             "transactionTotalAmount": 0
           }
         }

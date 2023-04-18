@@ -22,10 +22,14 @@ const configSchema = mongoose.Schema(
         },
         transactionAmount: {
           transactionAmountLimit: {
-            petTransactionAmount: {
+            perTransactionAmount: {
                 type: Number,
                 default: 0
             },
+            perDayTransactionAmount: {
+              type: Number,
+              default: 0
+          },
             transactionTotalAmount: {
                 type: Number,
                 default: 0

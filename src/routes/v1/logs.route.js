@@ -10,5 +10,6 @@ router
   .get(logsController.getLogs)
 router
   .route('/:logId')
-  .put(logsController.editLogs);
+  .put(logsController.editLogs)
+  .get(logsController.getLogByLogId)
 module.exports = router;

@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { userLimitationsService } = require('../services');
 const pick = require('../utils/pick');
+const ObjectId = require('mongoose/lib/types/objectid');
 
 const addLimitation = catchAsync(async (req, res) => {
     const newLimitation = await userLimitationsService.createLimitation(req.body);
@@ -28,10 +29,22 @@ const deleteLimitation = catchAsync(async (req, res) => {
     const limit = await userLimitationsService.deleteLimitation(req.params.limitId, req.body);
     res.send(limit);
 });
+const getBulkLimitsById = catchAsync(async (req, res) => {
+    const bulkIds = req.params.userIds.split(',');
+
+    // Convert user IDs to ObjectIds, but use the $expr operator in the filter
+    const query = bulkIds.map(e => ObjectId(`${e}`));
+
+    const filter = { $expr: { $and: [{ $in: ["$userId", query] }, { $eq: ["$deleted", false] }] }};
+    const limits = await userLimitationsService.getBulkLimitsById(filter);
+    res.send(limits);
+});
+
 module.exports = {
     addLimitation,
     getLimitations,
     getLimitsById,
     editLimitation,
-    deleteLimitation
+    deleteLimitation,
+    getBulkLimitsById
 };

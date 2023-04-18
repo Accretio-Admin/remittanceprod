@@ -1,4 +1,5 @@
 const httpStatus = require("http-status");
+const ObjectId = require("mongoose/lib/types/objectid");
 const { ApiGroups } = require("../models");
 const ApiTokens = require("../models/api-tokens.model");
 const ApiError = require("../utils/ApiError");
@@ -79,9 +80,34 @@ const createGroupApiEndpoints = async (apiGroupData) => {
     const groupData = createApiGroupData(apiGroupData);
     return ApiGroups.create(groupData);
 };
+const getApiGroupById = async (id) => {
+    return ApiGroups.findById(id);
+}
+const editApiGroupById = async (groupId, updateBody) => {
+    const apiGroup = await getApiGroupById(groupId);
+    if (!apiGroup) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'API group not found');
+    }
+    const groupIsInUse = await ApiTokens.find({endpointGroupId: ObjectId(groupId)}).count();
+    const endpointsInUse = await ApiGroups.findById(groupId);
+    if(groupIsInUse > 0 && updateBody.endpoints.length < endpointsInUse.endpoints.length){
+        throw new ApiError(httpStatus.NOT_FOUND, 'API group is in use and its endpoints cannot be deleted.');
+    }
+    Object.assign(apiGroup, updateBody);
+    await apiGroup.save();
+    return apiGroup;
+}
 const getGroupApiEndpoints = async (filter, options) => {
     const apiGroups =  await ApiGroups.paginate(filter, options);
     return apiGroups;
+};
+const deleteApiGroup = async (groupId) => {
+    const groupIsInUse = await ApiTokens.find({endpointGroupId: ObjectId(groupId)}).count();
+    if(groupIsInUse > 0){
+        throw new ApiError(httpStatus.NOT_FOUND, 'API group is in use and cannot be deleted.');
+    }
+    const remove = { deleted: true };
+    return await editApiGroupById(groupId, remove);
 };
 module.exports = {
     createGroupApiEndpoints,
@@ -91,5 +117,7 @@ module.exports = {
     getToken,
     getGroupIdByName,
     editTokenById,
-    getGroupApiEndpoints
+    getGroupApiEndpoints,
+    editApiGroupById,
+    deleteApiGroup
 }

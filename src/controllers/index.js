@@ -7,3 +7,4 @@ module.exports.landbankController = require('./landbank.controller');
 module.exports.apiTokenController = require('./api-token.controller');
 module.exports.configController = require('./config.controller');
 module.exports.logsController = require('./logs.controller');
+module.exports.bayadcenterController = require('./bayad-center.controller');

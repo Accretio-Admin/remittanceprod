@@ -17,8 +17,14 @@ const getLogs = catchAsync(async (req, res) => {
     const result = await logsService.getLogs(filter, options);
     res.send(result);
 });
+const getLogByLogId = catchAsync(async (req, res) => {
+    const log = await logsService.getLogById(req.params.logId)
+    res.send(log);
+});
+
 module.exports = {
     addLogs,
     editLogs,
-    getLogs
+    getLogs,
+    getLogByLogId
 };

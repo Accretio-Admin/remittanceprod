@@ -20,17 +20,17 @@ const paginate = (schema) => {
    * @returns {Promise<QueryResult>}
    */
   schema.statics.paginate = async function (filter, options) {
-    let sort = "";
-    if (options.sortBy) {
-      const sortingCriteria = [];
-      options.sortBy.split(",").forEach((sortOption) => {
-        const [key, order] = sortOption.split(":");
-        sortingCriteria.push((order === "desc" ? "-" : "") + key);
-      });
-      sort = sortingCriteria.join(" ");
-    } else {
-      sort = "createdAt";
-    }
+    // let sort = "";
+    // if (options.sortBy) {
+    //   const sortingCriteria = [];
+    //   options.sortBy.split(",").forEach((sortOption) => {
+    //     const [key, order] = sortOption.split(":");
+    //     sortingCriteria.push((order === "desc" ? "-" : "") + key);
+    //   });
+    //   sort = sortingCriteria.join(" ");
+    // } else {
+    //   sort = "createdAt";
+    // }
 
     let limit =
       options.limit && parseInt(options.limit, 10) > 0
@@ -75,7 +75,8 @@ const paginate = (schema) => {
       limit = 0;
     }
     const countPromise = this.countDocuments(filter).exec();
-    let docsPromise = this.find(filter).sort(sort).skip(skip).limit(limit);
+    // sort = {};
+    let docsPromise = this.find(filter).skip(skip).limit(limit);
     if (options.populate) {
       options.populate.split(",").forEach((populateOption) => {
         docsPromise = docsPromise.populate(

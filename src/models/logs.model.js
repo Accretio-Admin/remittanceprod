@@ -3,15 +3,21 @@ const { toJSON, paginate } = require('./plugins');
 
 const logsSchema = mongoose.Schema(
     {
-        enter: {
-            type: Date,
+        enterTime: {
+            type: String,
             required: true,
-            default: new Date()
         },
-        exit: {
-            type: Date,
+        enterDate: {
+            type: String,
             required: true,
-            default: new Date()
+        },
+        exitTime: {
+            type: String,
+            required: true,
+        },
+        exitDate: {
+            type: String,
+            required: true,
         },
         ip: {
             type: String,

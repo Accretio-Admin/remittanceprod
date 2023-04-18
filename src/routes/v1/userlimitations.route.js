@@ -14,5 +14,8 @@ router
     .get(userLimitationsController.getLimitsById)
     .patch(userLimitationsController.editLimitation)
     .delete(userLimitationsController.deleteLimitation);
+router
+    .route('/bulk/:userIds')
+    .get(userLimitationsController.getBulkLimitsById)
 
 module.exports = router;

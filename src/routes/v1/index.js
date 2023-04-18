@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const landbankRoute = require('./landbank.route');
+const bayadcenterRoute = require('./bayadcenter.route');
 const regionsRoute = require('./regions.route');
 const apiToken = require('./api-token.route');
 const userLimitationsRoute = require('./userlimitations.route');
@@ -31,6 +32,10 @@ const defaultRoutes = [
   {
     path: '/landbank',
     route: landbankRoute,
+  },
+  {
+    path: '/bayadcenter',
+    route: bayadcenterRoute,
   },
   {
     path: '/token',

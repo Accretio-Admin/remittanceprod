@@ -30,6 +30,10 @@ const landbankTransactionSchema = mongoose.Schema(
       default: "",
       type: String,
     },
+    amount: {
+      type: Number,
+      default: 0
+    },
     referrer: { type: mongoose.Schema.Types.ObjectId, ref: "User" , autopopulate: true },
     comission: {
       default: 0,

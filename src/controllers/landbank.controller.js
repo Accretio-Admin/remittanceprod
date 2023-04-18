@@ -58,10 +58,10 @@ const accountInquiry = catchAsync(async (req, res) => {
     });
 });
 const remit = catchAsync(async (req, res) => {
-    const userId = await tokenService.getUserField(req.headers.authorization.replace('Bearer ', ''), "id");
-    const ip = req.ip;
-    const remittanceInfo = req.body.remittance;
     try{
+        const userId = await tokenService.getUserField(req.headers.authorization.replace('Bearer ', ''), "id");
+        const ip = req.ip;
+        const remittanceInfo = req.body.remittance;
         const userCredntial = await credentialsService.isUserAssignedToAnyCredentials(userId);
         let curl = remittance(userCredntial.credential , remittanceInfo);
         const formula = {
@@ -77,13 +77,14 @@ const remit = catchAsync(async (req, res) => {
                 user: userId,
                 ip: ip,
                 type: remittanceInfo.foreignOfficeServiceCode,
-                amount: remittanceInfo.beneficiaryAmountConverted,
+                amount: parseFloat(remittanceInfo.beneficiaryAmountConverted),
                 status: status,
                 result: JSON.stringify(response),
                 referrer: res.locals.referrer,
-                // No comission of tx was failed
-                comission: status=='successful' ? formula[res.locals.comissionType.type](remittanceInfo.beneficiaryAmountConverted, res.locals.comissionType.value) : 0,
+                // No comission if tx was failed
+                comission: (status=='successful') ? formula[res.locals.comissionType.type](remittanceInfo.beneficiaryAmountConverted, res.locals.comissionType.value) : 0,
                 comissionType: res.locals.comissionType.type,
+                receiver: `${remittanceInfo.beneficiarysLastName}, ${remittanceInfo.beneficiarysFirstName} ${remittanceInfo.beneficiarysMiddleName}`
             }
             await transactionService.createTransaction(txInfo);
             res.status(httpStatus.CREATED).send(response);

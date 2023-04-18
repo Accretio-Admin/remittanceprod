@@ -32,6 +32,11 @@ const deleteLimitation = async (limitId) => {
     const remove = {deleted: true};
     return await editLimitationById(limitId, remove);
 };
+const getBulkLimitsById = async (limitIds) => {
+    console.log(limitIds);
+    console.log(await UserLimitations.find(limitIds))
+    return await UserLimitations.find(limitIds);
+};
 module.exports = {
     createLimitation,
     queryUserLimitations,
@@ -39,5 +44,6 @@ module.exports = {
     getUserLimitsById,
     editLimitationById,
     deleteLimitation,
-    getUserLimits
+    getUserLimits,
+    getBulkLimitsById
 };

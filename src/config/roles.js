@@ -232,6 +232,10 @@ const dashboardAccessLevels = {
     },
   },
 };
+const activeEndpoints = [
+  "/v1/landbank/account/remittance",
+  "/v1/bayadcenter"
+]
 const roles = Object.keys(allRoles);
 const roleRights = new Map(Object.entries(allRoles));
 const dashboardAl = new Map(Object.entries(dashboardAccessLevels));
@@ -241,5 +245,6 @@ module.exports = {
   roles,
   roleRights,
   accessLevel,
-  dashboardAl
+  dashboardAl,
+  activeEndpoints
 };

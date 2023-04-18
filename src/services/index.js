@@ -10,3 +10,4 @@ module.exports.accessLevelService = require('./access-level.service');
 module.exports.apiToken = require('./api-token.service');
 module.exports.configService = require('./config.service');
 module.exports.logsService = require('./logs.service');
+module.exports.bayadcenterService = require('./bayad-center.service');

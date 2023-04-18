@@ -6,6 +6,7 @@ const apiGroupsSchema = mongoose.Schema(
     name: {
       default: "",
       type: String,
+      unique: true,
     },
     endpoints: {
       type: Array,

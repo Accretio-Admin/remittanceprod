@@ -5,12 +5,18 @@ const router = express.Router();
 
 router
     .route('/endpoints')
+    .get(apiTokenController.getActiveEndpoints);
+router
+    .route('/endpoints/group')
     .post(apiTokenController.createGroupApiEndpoints)
     .get(apiTokenController.getGroupApiEndpoints);
 router
+    .route('/endpoints/group/:groupId')
+    .put(apiTokenController.editGroupApiEndpoints)
+    .delete(apiTokenController.deleteGroupApiEndpoint);
+router
     .route('/code')
     .post(apiTokenController.createToken)
-    // .get(apiTokenController.getTokenByUserId)
 router
     .route('/code/:userId')
     .get(apiTokenController.getTokenByUserId)

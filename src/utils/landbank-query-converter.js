@@ -8,7 +8,6 @@ const remittanceSoapBuilder = (credentials, remittanceDetails) => {
 const txDetailsSoapBuilder = (credentials, tx) => {
   return `${soapCurlHeader}'<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:rem=\"http://remittance.webservice.carnelian.ccti.com/\"><soapenv:Header/><soapenv:Body><rem:inquireTransaction><arg0><communityCd>${credentials.communityCode}</communityCd><password>${credentials.password}</password><username>${credentials.username}</username></arg0><arg1>${tx}</arg1></rem:inquireTransaction></soapenv:Body></soapenv:Envelope>'`
 }
-
 const inquiry = (credentials) => {
   return inquirySoapBuilder(credentials);
 };
