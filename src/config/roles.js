@@ -234,7 +234,9 @@ const dashboardAccessLevels = {
 };
 const activeEndpoints = [
   "/v1/landbank/account/remittance",
-  "/v1/bayadcenter"
+  "/v1/bayadcenter",
+  "/v1/ubx",
+  
 ]
 const roles = Object.keys(allRoles);
 const roleRights = new Map(Object.entries(allRoles));
