@@ -24,7 +24,7 @@ const accessLevel = {
 };
 const dashboardAccessLevels = {
   initialsuperadmin: {
-    projects: ["remittance", "bayad center"],
+    projects: ["remittance", "bayad center", "ubx", "venload", "venbill"],
     users: {
       main: true,
       listing: {
@@ -76,7 +76,7 @@ const dashboardAccessLevels = {
     },
   },
   superadmin: {
-    projects: ["remittance", "bayad center"],
+    projects: ["remittance", "bayad center", "ubx", "venload", "venbill"],
     users: {
       main: true,
       listing: {
@@ -128,7 +128,7 @@ const dashboardAccessLevels = {
     },
   },
   admin: {
-    projects: ["remittance", "bayad center"],
+    projects: ["remittance", "bayad center", "ubx", "venload", "venbill"],
     users: {
       main: true,
       listing: {
@@ -180,7 +180,7 @@ const dashboardAccessLevels = {
     },
   },
   companyadmin: {
-    projects: ["remittance", "bayad center"],
+    projects: ["remittance", "bayad center", "ubx", "venload", "venbill"],
     users: {
       main: true,
       listing: {
@@ -236,6 +236,8 @@ const activeEndpoints = [
   "/v1/landbank/account/remittance",
   "/v1/bayadcenter",
   "/v1/ubx",
+  "/v1/venload",
+  "/v1/venbill",
   
 ]
 const roles = Object.keys(allRoles);

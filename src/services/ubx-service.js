@@ -29,9 +29,9 @@ const requestTokenUBX = async () => {
                 },
             }
         );
-
+		
         if (response.status === 200) {
-            return response.data.access_token;
+            return response.data.accessToken;
         }
     } catch (error) {
         throw new ApiError(httpStatus.BAD_REQUEST, "Error creating token for UBX");
@@ -40,6 +40,7 @@ const requestTokenUBX = async () => {
 
 const axiosAuthInstanceUBX = async () => {
     const token = await requestTokenUBX();
+	
     return axios.create({
         baseURL,
         headers: {
@@ -56,42 +57,42 @@ const apiCallUBX = async (method, url, data) => {
 };
 
 // Instapay Functions
-const getBankInstapay = () => apiCallUBX("get", "/instapay/banks");
-const getPurposeInstapay= () => apiCallUBX("get", "/instapay/purpose");
-const postValidateInstapay = (data) => apiCallUBX("post", "/instapay/validate", data);
-const postProcessInstapay = (data) => apiCallUBX("post", "/instapay/process/direct", data);
+const xgetBankInstapay = () => apiCallUBX("get", "/instapay/banks");
+const xgetPurposeInstapay= () => apiCallUBX("get", "/instapay/purpose");
+const xpostValidateInstapay = (data) => apiCallUBX("post", "/instapay/validate", data);
+const xpostProcessInstapay = (data) => apiCallUBX("post", "/instapay/process/direct", data);
 
 // Pesopay Functions
-const getBankPesonet = () => apiCallUBX("get", "/pesonet/banks");
-const getPurposePesonet = () => apiCallUBX("get", "/pesonet/purpose");
-const postValidatePesonet = (data) => apiCallUBX("post", "/pesonet/validate", data);
-const postProcessPesonet = (data) => apiCallUBX("post", "/pesonet/process/direct", data);
+const xgetBankPesonet = () => apiCallUBX("get", "/pesonet/banks");
+const xgetPurposePesonet = () => apiCallUBX("get", "/pesonet/purpose");
+const xpostValidatePesonet = (data) => apiCallUBX("post", "/pesonet/validate", data);
+const xpostProcessPesonet = (data) => apiCallUBX("post", "/pesonet/process/direct", data);
 //check bank for both
-const checkStatusBank = (transactionNumber) => apiCallUBX("get", `/checkStatus/transaction/${transactionNumber}`);
+const xcheckStatusBank = (transactionNumber) => apiCallUBX("get", `/checkStatus/transaction/${transactionNumber}`);
 
-//biller functions\
-const getBillers = () => apiCallUBX("get", `/paybills/billers`);
-const getBillerRef = (billerCode) => apiCallUBX("get", `/paybills/billers/${billerCode}`);
-const postValidateBiller = (data) => apiCallUBX("post", "/paybills/validate", data);
-const postProcessBiller = (transactionNumber) => apiCallUBX("get", `/paybills/direct/process/${transactionNumber}`);
-const checkStatusBiller = () => apiCallUBX("get", `/paybills`, data);
+//biller functions
+const xgetBillers = () => apiCallUBX("get", `/paybills/billers`);
+const xgetBillerRef = (billerCode) => apiCallUBX("get", `/paybills/billers/${billerCode}`);
+const xpostValidateBiller = (data) => apiCallUBX("post", "/paybills/validate", data);
+const xpostProcessBiller = (transactionNumber) => apiCallUBX("get", `/paybills/direct/process/${transactionNumber}`);
+const xcheckStatusBiller = () => apiCallUBX("get", `/paybills`, data);
 
 module.exports = {
   
-    getBankInstapay, 
-    getPurposeInstapay, 
-    postValidateInstapay,
-	postProcessInstapay,
-	getBankPesonet,
-	getPurposePesonet,
-	postValidatePesonet,
-	postProcessPesonet,
-	checkStatusBank,
-	getBillers,
-	getBillerRef,
-	postValidateBiller,
-	postProcessBiller,
-	checkStatusBiller
+    xgetBankInstapay, 
+    xgetPurposeInstapay, 
+    xpostValidateInstapay,
+	xpostProcessInstapay,
+	xgetBankPesonet,
+	xgetPurposePesonet,
+	xpostValidatePesonet,
+	xpostProcessPesonet,
+	xcheckStatusBank,
+	xgetBillers,
+	xgetBillerRef,
+	xpostValidateBiller,
+	xpostProcessBiller,
+	xcheckStatusBiller
 	
 	
 };

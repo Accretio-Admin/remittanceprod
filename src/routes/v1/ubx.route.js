@@ -1,61 +1,20 @@
 const express = require('express');
-const { ubxController } = require('../../controllers');
 const router = express.Router();
-const agentLimitation = require('../../middlewares/lb-limitations');
-router
-    .route('/instapay/banks')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getBankInstapay);
+const ubxController = require('../../controllers/ubx.controller');
 
-router
-    .route('/instapay/purpose')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getPurposeInstapay);
-
-router
-    .route('/instapay/validate')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postValidateInstapay);
-
-router
-    .route('/instapay/process')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postProcessInstapay);
-
-router
-    .route('/pesonet/banks')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getBankPesonet);
-
-router
-    .route('/pesonet/purpose')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getPurposePesonet);
-
-router
-    .route('/pesonet/validate')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postValidatePesonet);
-
-router
-    .route('/pesonet/process')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postProcessPesonet);
-
-router
-    .route('/checkStatus/transaction/:transactionNumber')
-    .get(agentLimitation.checkIfUserLimited, ubxController.checkStatusBank);
-
-router
-    .route('/paybills/billers')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getBillers);
-
-router
-    .route('/paybills/billers/:billerCode')
-    .get(agentLimitation.checkIfUserLimited, ubxController.getBillerRef);
-
-router
-    .route('/paybills/validate')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postValidateBiller);
-
-router
-    .route('/paybills/process/:transactionNumber')
-    .post(agentLimitation.checkIfUserLimited, ubxController.postProcessBiller);
-
-router
-    .route('/paybills/checkStatus')
-    .get(agentLimitation.checkIfUserLimited, ubxController.checkStatusBiller);
+router.get('/instapay/banks', ubxController.getBankInstapay);
+router.get('/instapay/purpose', ubxController.getPurposeInstapay);
+router.post('/instapay/validate', ubxController.postValidateInstapay);
+router.post('/instapay/process', ubxController.postProcessInstapay);
+router.get('/pesonet/banks', ubxController.getBankPesonet);
+router.get('/pesonet/purpose', ubxController.getPurposePesonet);
+router.post('/pesonet/validate', ubxController.postValidatePesonet);
+router.post('/pesonet/process', ubxController.postProcessPesonet);
+router.get('/checkStatus/transaction/:transactionNumber', ubxController.checkStatusBank);
+router.get('/paybills/billers', ubxController.getBillers);
+router.get('/paybills/billers/:billerCode', ubxController.getBillerRef);
+router.post('/paybills/validate', ubxController.postValidateBiller);
+router.post('/paybills/process/:transactionNumber', ubxController.postProcessBiller);
+router.get('/paybills/checkStatus', ubxController.checkStatusBiller);
 
 module.exports = router;

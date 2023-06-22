@@ -4,6 +4,10 @@ const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const landbankRoute = require('./landbank.route');
 const bayadcenterRoute = require('./bayadcenter.route');
+const bayadcenterRoute = require('./bayadcenter.route');
+const ubxRoute = require('./ubx.route');
+const venloadRoute = require('./venload.route');
+const venbillRoute = require('./venbill.route');
 const regionsRoute = require('./regions.route');
 const apiToken = require('./api-token.route');
 const userLimitationsRoute = require('./userlimitations.route');
@@ -32,6 +36,18 @@ const defaultRoutes = [
   {
     path: '/landbank',
     route: landbankRoute,
+  },
+  {
+    path: '/ubx',
+    route: ubxRoute,
+  },
+  {
+    path: '/venload',
+    route: venloadRoute,
+  },
+  {
+    path: '/venbill',
+    route: venbillRoute,
   },
   {
     path: '/bayadcenter',
